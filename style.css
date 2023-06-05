@@ -1,0 +1,32 @@
+/* Styles */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #1e1b4b;
+  color: #e0e7ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+a {
+  color: #e0e7ff;
+}
+
+a:visited {
+  color: #a78bfa;
+}
+
+table,
+td,
+tr,
+th {
+  border: 1px solid #e0e7ff;
+  border-collapse: collapse;
+  padding: 0.5rem 1rem;
+}
