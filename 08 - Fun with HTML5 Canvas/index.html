@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML5 Canvas</title>
+    <link rel="icon" href="https://fav.farm/🔥" />
+  </head>
+  <body>
+    <canvas id="draw" width="800" height="800"></canvas>
+    <section class="color-picker">
+      <button class="color-btn blue"></button>
+      <button class="color-btn black active"></button>
+      <button class="color-btn red"></button>
+      <button class="color-btn hue"></button>
+    </section>
+    <script>
+      const canvas = document.querySelector("#draw");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const colorBtns = document.querySelectorAll(".color-btn");
+      let isUsingHue = false;
+
+      function changeColor() {
+        colorBtns[0].classList.remove("active");
+        colorBtns[1].classList.remove("active");
+        colorBtns[2].classList.remove("active");
+        colorBtns[3].classList.remove("active");
+        this.classList.toggle("active");
+        if (this.classList[1] == "hue") {
+          console.log("This is hue");
+          isUsingHue = true;
+        } else {
+          console.log(this.classList[1]);
+          isUsingHue = false;
+          ctx.strokeStyle = this.classList[1];
+        }
+      }
+
+      const ctx = canvas.getContext("2d");
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      ctx.lineWidth = 10;
+      let isDrawing = false;
+      let [lastX, lastY] = [0, 0];
+      let hue = 0;
+
+      function draw(e) {
+        if (!isDrawing) return;
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+        console.log(ctx.strokeStyle);
+        if (isUsingHue) {
+          ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+          hue++;
+          console.log(hue);
+        }
+
+        if (hue >= 360) {
+          hue = 0;
+        }
+      }
+
+      canvas.addEventListener("mousemove", draw);
+      canvas.addEventListener("mousedown", (e) => {
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+        return (isDrawing = true);
+      });
+
+      canvas.addEventListener("mouseup", () => (isDrawing = false));
+      canvas.addEventListener("mouseout", () => (isDrawing = false));
+
+      colorBtns.forEach((btn) => {
+        btn.addEventListener("click", changeColor);
+      });
+    </script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+
+      section.color-picker {
+        text-align: center;
+        position: fixed;
+        bottom: 2%;
+        left: 50%;
+        transform: translate(-50%);
+      }
+
+      .color-btn {
+        border-radius: 50%;
+        border: none;
+        width: 15px;
+        height: 15px;
+      }
+
+      .color-btn.active {
+        border: 1px solid white;
+        outline: 1px solid black;
+      }
+
+      .color-btn.blue {
+        background-color: blue;
+      }
+
+      .color-btn.black {
+        background-color: black;
+      }
+
+      .color-btn.red {
+        background-color: red;
+      }
+
+      .color-btn.green {
+        background-color: green;
+      }
+
+      .hue {
+        background: transparent;
+        background-image: url("color-picker.png");
+        background-position: center;
+        background-size: cover;
+      }
+    </style>
+  </body>
+</html>
