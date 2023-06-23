@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Console Tricks!</title>
+    <link rel="icon" href="https://fav.farm/🔥" />
+  </head>
+  <body>
+    <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+    <script>
+      const dogs = [
+        { name: "Snickers", age: 2 },
+        { name: "hugo", age: 8 },
+      ];
+      const p = document.querySelector("p");
+
+      function makeGreen() {
+        p.style.color = "#BADA55";
+        p.style.fontSize = "50px";
+      }
+
+      // Regular
+      console.log("Hello");
+
+      // Interpolated
+      console.log("Hello I am a %s string, and I am %s string", "🤯", "Second");
+
+      // Styled
+      console.log(
+        "%c I am string in fashion",
+        "font-size: 1rem; background-color: #161"
+      );
+
+      // warning!
+      console.warn("Something can go wrong, check everything");
+
+      // Error :|
+      console.error("Something is wrong!");
+
+      // Info
+      console.info(
+        "Node.js is a open-source, cross-platform runtime environment that runs on v8 engine and execute JavaScript outside the browser."
+      );
+
+      // Testing
+      console.assert(1 === 2, "Thats wrong");
+
+      // clearing
+      // console.clear();
+
+      // Viewing DOM Elements
+      console.log(p.textContent);
+      console.dir(p);
+
+      // Grouping together
+      console.groupCollapsed("Group 1");
+      console.log("Group 1 content");
+      console.log("Group 1 text");
+      console.groupEnd("Group 1");
+
+      console.groupCollapsed("Group 2");
+      console.log("Group 2 content");
+      console.log("Group 2 text");
+      console.groupEnd();
+      console.groupCollapsed("Group 3");
+      console.log("Group 3 content");
+      console.log("Group 3 text");
+      console.groupEnd();
+
+      // counting
+      console.count("Nitin");
+      console.count("Nitin");
+      console.count("Nitin");
+      console.count("Nitin");
+      console.count("Nitin");
+      console.count("Nitin");
+      console.count("Nitin");
+      console.count("Nitin");
+      console.count("Nitin");
+      console.count("Nitin");
+
+      // timing
+      console.time("Data Fetch");
+      fetch("https://api.github.com/users/nitin-io/followers")
+        .then((data) => data.json())
+        .then((data) => {
+          console.log(data);
+          console.timeEnd("Data Fetch");
+        });
+    </script>
+  </body>
+</html>
